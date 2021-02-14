@@ -1,10 +1,13 @@
 FROM php:8-cli
 
+# install dependency
+RUN apt-get update \
+    && apt install -y git unzip
+
 # install composer
 RUN cd /root \
     && curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer \
-    && apt install git unzip
+    && mv composer.phar /usr/local/bin/composer
 
 # install npm
 RUN apt-get update \
