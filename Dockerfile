@@ -3,7 +3,8 @@ FROM php:8-cli
 # install composer
 RUN cd /root \
     && curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer
+    && mv composer.phar /usr/local/bin/composer \
+    && apt install git unzip
 
 # install npm
 RUN apt-get update \
