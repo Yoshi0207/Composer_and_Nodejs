@@ -1,8 +1,9 @@
-FROM php:8-cli
+FROM php:8-alpine
 
 # install dependency
-RUN apt-get update \
-    && apt install -y git unzip
+RUN apk update \
+    && apk add --no-cache git unzip \
+    && apk add --no-cache bash
 
 # install composer
 RUN cd /root \
@@ -10,12 +11,5 @@ RUN cd /root \
     && mv composer.phar /usr/local/bin/composer
 
 # install npm
-RUN apt-get update \
-    && apt install -y nodejs npm \
-    && npm install -g n \
-    && n stable \
-    && apt purge -y nodejs npm
-
-# clear cache
-RUN apt-get -y clean \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk update \
+    && apk add --no-cache --update nodejs npm \
